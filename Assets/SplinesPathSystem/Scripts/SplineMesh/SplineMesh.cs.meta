@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 05a3352a730c449c78ca94ce7ce88baf
+labels:
+- Spline
+- SuperSplines
+- curved
+- interpolation
+- mesh
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

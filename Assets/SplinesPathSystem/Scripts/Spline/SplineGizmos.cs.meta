@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 33680e2e3235949349aa08d58a7a47f9
+labels:
+- interpolation
+- SuperSplines
+- animation
+- curvedpaths
+- path
+- curve
+- Spline
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
