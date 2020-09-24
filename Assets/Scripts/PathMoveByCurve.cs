@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathMoveByCurve : MonoBehaviour
+public class PathMoveByCurve 
 {
     private Transform m_trans;
 
-    public Curve curve;
+    private Curve m_curve;
 
     public WrapMode wrapMode = WrapMode.Loop;
 
@@ -18,18 +18,19 @@ public class PathMoveByCurve : MonoBehaviour
 
     Vector3 m_lastPosOnCurve = Vector3.zero;
 
-    void Awake()
+    public void Init(Transform transform, Curve curve)
     {
         m_trans = transform;
+        m_curve = curve;
     }
 
-    void Update()
+    public void Update()
     {
         passedTime += Time.deltaTime * speed;
         float clampedParam = WrapValue(passedTime, 0f, 1f, wrapMode);
 
         //坐标
-        m_trans.position = curve.GetPositionOnCurve(clampedParam);
+        m_trans.position = m_curve.GetPositionOnCurve(clampedParam);
         //旋转
         var forward = m_trans.position - m_lastPosOnCurve;
         var newRot = Quaternion.LookRotation(forward, new Vector3(0, 1, 0));

@@ -52,6 +52,7 @@ public class ResourceMgr
         //编辑器下，直接从磁盘路径中读取资源
         res = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPath);
 #else
+        //TODO，通过AssetBundle加载
 
 #endif
         if (null != res)

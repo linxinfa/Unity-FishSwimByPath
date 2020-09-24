@@ -1,34 +1,42 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// 通过Spline控制游动
+/// </summary>
 public class PathMoveBySpline : MonoBehaviour
 {
     public Spline spline;
-
-    public WrapMode wrapMode = WrapMode.Loop;
-
-    public float speed = 0.02f;
-
     public float passedTime = 0f;
 
+    //游动速度
+    public float speed = 0.02f;
+    //角度偏移
     public float rotationOffset;
+    //游动类型
+    public WrapMode wrapMode = WrapMode.Loop;
 
-    Vector3 m_lastPosOnCurve = Vector3.zero;
+    private Transform m_selfTrans;
 
- 
+    void Awake()
+    {
+        m_selfTrans = transform;
+    }
 
     void Update()
     {
+        //时间戳
         passedTime += Time.deltaTime * speed;
-
+        //根据类型计算归一化时间戳
         float clampedParam = WrapValue(passedTime, 0f, 1f, wrapMode);
-
-        transform.rotation = spline.GetOrientationOnSpline(WrapValue(passedTime + rotationOffset, 0f, 1f, wrapMode));
-        transform.position = spline.GetPositionOnSpline(clampedParam) - transform.right * spline.GetCustomValueOnSpline(clampedParam) * .5f;
-
+        //设置角度
+        m_selfTrans.rotation = spline.GetOrientationOnSpline(WrapValue(passedTime + rotationOffset, 0f, 1f, wrapMode));
+        //设置坐标
+        m_selfTrans.position = spline.GetPositionOnSpline(clampedParam);
     }
 
+    /// <summary>
+    /// 根据类型计算归一化时间戳
+    /// </summary>
     private float WrapValue(float v, float start, float end, WrapMode wMode)
     {
         switch (wMode)

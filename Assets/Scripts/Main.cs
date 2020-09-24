@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
+    public Button createFishBtn;
+
     void Start()
     {
-        var curve = PathMgr.instance.GetPathSplineByBin("Path01.bytes");
-        var moveObj = new GameObject("moveObj");
-        var move = moveObj.AddComponent<PathMoveByCurve>();
-        move.curve = curve;
+        createFishBtn.onClick.AddListener(() => 
+        {
+            var pathId = Random.Range(1, 4);
+            FishManager.instance.CreateFish("Fish/FishModel.prefab", pathId + ".bytes");
+        });
+    }
 
-        var fishObj = ResourceMgr.instance.Instantiate<GameObject>("Fish/FishModel.prefab");
-        fishObj.transform.SetParent(moveObj.transform, false);
+    void Update()
+    {
+        FishManager.instance.Update();
     }
 }
