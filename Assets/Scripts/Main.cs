@@ -5,10 +5,19 @@ using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
+    public Camera uiCamera;
+
     public Button createFishBtn;
+    public Transform uiGunTrans;
 
     void Start()
     {
+        FishManager.instance.Init();
+        GunManager.instance.Init(uiCamera, uiGunTrans);
+        BulletManager.instance.Init();
+
+        
+
         createFishBtn.onClick.AddListener(() => 
         {
             var pathId = Random.Range(1, 4);
@@ -19,5 +28,7 @@ public class Main : MonoBehaviour
     void Update()
     {
         FishManager.instance.Update();
+        GunManager.instance.Update();
+        BulletManager.instance.Update();
     }
 }

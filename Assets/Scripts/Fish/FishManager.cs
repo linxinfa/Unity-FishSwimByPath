@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class FishManager
 {
+    public void Init()
+    {
+        if(null == m_rootTrans)
+        {
+            m_rootTrans = new GameObject("FishRoot").transform;
+        }
+    }
+
     /// <summary>
     /// 创建鱼接口
     /// </summary>
@@ -13,6 +21,8 @@ public class FishManager
     {
         var uuid = System.Guid.NewGuid().ToString("N");
         var fishObj = new GameObject("fish");
+        fishObj.transform.SetParent(m_rootTrans, false);
+
         //加载路径二进制文件，反序列化成Curve对象
         var curve = PathMgr.instance.GetPathSplineByBin(pathRes);
 
@@ -52,6 +62,7 @@ public class FishManager
         }
     }
 
+    Transform m_rootTrans;
     Dictionary<string, FishUnit> m_fishDic = new Dictionary<string, FishUnit>();
 
     private static FishManager s_instance;
